@@ -1,0 +1,6 @@
+projectKey=com.example:simple-java-maven-app
+serverUrl=http://localhost:9000
+serverVersion=10.3.0.82913
+dashboardUrl=http://localhost:9000/dashboard?id=com.example%3Asimple-java-maven-app
+ceTaskId=AZVMCPZjlRfN50u2SaM8
+ceTaskUrl=http://localhost:9000/api/ce/task?id=AZVMCPZjlRfN50u2SaM8
