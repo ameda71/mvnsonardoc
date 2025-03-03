@@ -6,8 +6,10 @@ pipeline {
     environment {
         SONAR_URL = 'http://34.30.219.230:9000'
         SONAR_TOKEN = credentials('sonar-token')  // Add this in Jenkins credentials
-        IMAGE_NAME = "myapp"
-        IMAGE_TAG = "latest"
+        IMAGE_NAME = "saitejamvn"
+        IMAGE_TAG = "amedasonar"
+        DOCKER_HUB_USER = credentials('docker-hub-user')
+        DOCKER_REPO = "saiteja562/jenkinsmvndocker"
     }
 
     stages {
@@ -43,6 +45,17 @@ pipeline {
         stage('Run Docker Container') {
             steps {
                 sh 'docker run -d -p 8086:8081 --name myapp_container ${IMAGE_NAME}:${IMAGE_TAG}'
+            }
+        }
+        stage('Push Docker Image to Docker Hub') {
+            steps {
+                script {
+                    sh '''
+                    echo "${DOCKER_HUB_USER_PSW}" | docker login -u "${DOCKER_HUB_USER_USR}" --password-stdin
+                    docker tag ${IMAGE_NAME}:${IMAGE_TAG} ${DOCKER_REPO}:${IMAGE_TAG}
+                    docker push ${DOCKER_REPO}:${IMAGE_TAG}
+                    '''
+                }
             }
         }
     }
