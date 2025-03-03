@@ -44,7 +44,7 @@ pipeline {
 
         stage('Run Docker Container') {
             steps {
-                sh 'docker run -d -p 8086:8081 --name myapp_container ${IMAGE_NAME}:${IMAGE_TAG}'
+                sh 'docker run -d -p 8086:8081 --name slicecontainer ${IMAGE_NAME}:${IMAGE_TAG}'
             }
         }
         stage('Push Docker Image to Docker Hub') {
