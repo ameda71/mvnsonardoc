@@ -1,7 +1,5 @@
 FROM openjdk:17
-
 WORKDIR /app
-
-COPY target/simple-java-maven-app-1.0-SNAPSHOT.jar /app/sam.jar
-
-CMD ["java","-jar","/app/sam.jar" ]
+COPY target/*.jar app.jar
+EXPOSE 8081
+CMD ["java", "-jar", "app.jar"]
