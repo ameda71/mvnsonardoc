@@ -8,7 +8,7 @@ pipeline {
         SONAR_TOKEN = credentials('sonar-token')  // Add this in Jenkins credentials
         IMAGE_NAME = "saitejamvn"
         IMAGE_TAG = "amedasonar"
-        DOCKER_HUB_USER = credentials('docker-hub-user')
+        DOCKER_HUB_USER = credentials('docker-token')
         DOCKER_REPO = "saiteja562/jenkinsmvndocker"
     }
 
