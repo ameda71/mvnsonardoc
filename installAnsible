@@ -1,0 +1,25 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Install Ansible') {
+            steps {
+                script {
+                    sh '''
+                    # Ensure the system is updated
+                    sudo dnf update -y
+                    
+                    # Install EPEL repository
+                    sudo dnf install -y epel-release
+                    
+                    # Install Ansible
+                    sudo dnf install -y ansible
+                    
+                    # Verify installation
+                    ansible --version
+                    '''
+                }
+            }
+        }
+    }
+}
