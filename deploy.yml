@@ -1,0 +1,31 @@
+- name: Deploy Docker Container from Image
+  hosts: all
+  become: yes
+
+  tasks:
+    - name: Install Docker (if not already installed)
+      package:
+        name: docker.io
+        state: present
+      when: 'ansible_host' != '34.30.219.230'
+
+
+    - name: Start Docker service
+      service:
+        name: docker
+        state: started
+        enabled: yes
+      when: 'ansible_host' != '34.30.219.230'
+
+    - name: Pull Docker Image from Docker Hub
+      command: docker pull saiteja562/jenkinsmvndocker:amedasonar
+      when: 'ansible_host' != '34.30.219.230'
+
+    - name: Stop and Remove Existing Container (if running)
+      command: docker rm -f ansible_container
+      ignore_errors: yes
+      when: 'ansible_host' != '34.30.219.230'
+
+    - name: Run Docker Container
+      command: docker run -d -p 8087:8081 --name ansible_container saiteja562/jenkinsmvndocker:amedasonar
+      when: 'ansible_host' != '34.30.219.230'
