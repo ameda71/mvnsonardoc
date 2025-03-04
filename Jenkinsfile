@@ -71,6 +71,32 @@ pipeline {
                 }
             }
         }
+
+        stage('Checking Connection') {
+            steps {
+                sh '''
+                ansible-inventopry --graph
+                '''
+            }
+        }
+
+        stage("Ping Ansible") {
+            steps {
+                sh '''
+                sleep 10
+                ansible all -m ping
+                '''
+            }
+        }
+
+        stage("Ansible Deployment") {
+            steps {
+                sh '''
+                ansible-playbook deploy.yml -e build_number=$BUILD_NUMBER
+                '''
+            }
+        }
+        
     }
 
     post {
