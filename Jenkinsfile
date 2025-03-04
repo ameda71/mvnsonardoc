@@ -75,7 +75,7 @@ pipeline {
         stage('Checking Connection') {
             steps {
                 sh '''
-                ansible-inventopry --graph
+                ansible-inventory --graph
                 '''
             }
         }
