@@ -18,7 +18,7 @@
       when: 'ansible_host' != '34.30.219.230'
 
     - name: Pull Docker Image from Docker Hub
-      command: docker pull saiteja562/jenkinsmvndocker:amedasonar
+      command: docker pull saiteja562/jenkinsmvndocker:{{ build_number }}
       when: 'ansible_host' != '34.30.219.230'
 
     - name: Stop and Remove Existing Container (if running)
@@ -27,5 +27,5 @@
       when: 'ansible_host' != '34.30.219.230'
 
     - name: Run Docker Container
-      command: docker run -d -p 8087:8081 --name ansible_container saiteja562/jenkinsmvndocker:amedasonar
+      command: docker run -d -p 8087:8081 --name ansible_container saiteja562/jenkinsmvndocker:{{ build_number }}
       when: 'ansible_host' != '34.30.219.230'
