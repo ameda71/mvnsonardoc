@@ -25,16 +25,29 @@ pipeline {
             }
         }
 
-        stage('SonarQube Analysis') {
+        stage("build & SonarQube analysis") {
+            agent any
             steps {
-                sh '''
-                mvn sonar:sonar \
-                    -Dsonar.projectKey=my-project \
-                    -Dsonar.host.url=${SONAR_URL} \
-                    -Dsonar.token=${SONAR_TOKEN}
-                '''
+              withSonarQubeEnv('sonar') {
+                sh ''' 
+                  
+                  mvn clean verify sonar:sonar \
+                      -Dsonar.projectKey=test1 \
+                      -Dsonar.projectName='test1' \
+                      -Dsonar.host.url=http://34.30.219.230:9000 \
+                      -Dsonar.token=squ_45724ab5b770fc81122b9f8c70a516bc479c54f1
+                  
+                  '''
+              }
             }
-        }
+          }
+          stage("Quality Gate") {
+            steps {
+              timeout(time: 10, unit: 'HOURS') {
+                waitForQualityGate abortPipeline: true
+              }
+            }
+          }
 
         stage('Build Docker Image') {
             steps {
