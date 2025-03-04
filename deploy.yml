@@ -8,11 +8,14 @@
         name: yum-utils
         state: present
       when: ansible_host != "34.30.219.230"
+      
+      
+
 
     - name: Add Docker repository
       shell: |
         yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
-        yum makecache fast
+        
       when: ansible_host != "34.30.219.230"
 
     - name: Install Docker
