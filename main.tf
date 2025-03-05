@@ -1,8 +1,7 @@
 provider "google" {
   project     = "mythic-guild-452305-m5"
   region      = "us-central1"
-  credentials = file("gcp.json")
-}
+  }
 
 resource "google_compute_instance" "centos_vm" {
   count        = 3  # Create 3 VMs
