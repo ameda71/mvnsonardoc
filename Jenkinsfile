@@ -10,6 +10,8 @@ pipeline {
         IMAGE_TAG = "amedasonar"
         DOCKER_HUB_USER = credentials('docker-token')
         DOCKER_REPO = "saiteja562/jenkinsmvndocker"
+        GOOGLE_APPLICATION_CREDENTIALS = credentials('gcp')
+        
     }
 
     stages {
@@ -69,6 +71,16 @@ pipeline {
                     docker push ${DOCKER_REPO}:${BUILD_NUMBER}
                     '''
                 }
+            }
+        }
+
+        stage("Terraform Create Instance") {
+            steps {
+                sh '''
+                terraform init
+                terraform plan
+                terraform apply --auto-approve
+                '''
             }
         }
 
