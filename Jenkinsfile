@@ -10,7 +10,7 @@ pipeline {
         IMAGE_TAG = "saiteja"
         DOCKER_HUB_USER = credentials('docker-hub')
         DOCKER_REPO = "saiteja562/mvnjavasonar"
-        GOOGLE_APPLICATION_CREDENTIALS = credentials('gcp')
+        GOOGLE_APPLICATION_CREDENTIALS = credentials('gcp-key')
         DEPLOY_YAML = 'deploy.yaml'
         
     }
