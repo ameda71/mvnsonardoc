@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: jenkinsmvn-container
-          image: saiteja562/jenkinsmvndocker:{{ build_number }}
+          image: saiteja562/mvnjavasonar:{{ build_number }}
           ports:
             - containerPort: 8888
 ---
