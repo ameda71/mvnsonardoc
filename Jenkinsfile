@@ -100,6 +100,27 @@ pipeline {
             }
         }
 
+        stage('Wait for Cluster Access') {
+            steps {
+                retry(3) {
+                    sh '''
+                    sleep 20
+                    gcloud container clusters get-credentials $CLUSTER_NAME --zone $ZONE --project manisai
+                    '''
+                }
+            }
+        }
+
+        stage('Deploy to Cluster') {
+            steps {
+                sh 'kubectl apply -f $'
+                sh 'sleep 50'
+                sh 'kubectl get svc'
+                sh 'sleep 20'
+                
+            }
+        }
+
      
 
     post {
