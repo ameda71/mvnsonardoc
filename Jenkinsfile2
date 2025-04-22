@@ -1,0 +1,12 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Checkout-code') {
+            steps {
+                checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/ameda71/mvnsonardoc.git']])
+            }
+        }
+      
+    }
+}
