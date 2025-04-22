@@ -74,41 +74,32 @@ pipeline {
             }
         }
 
-        stage("Terraform Create Instance") {
+        stage('GCP Login') {
             steps {
-                sh '''
-                terraform init
-                terraform plan
-                terraform apply --auto-approve
-                '''
+                withCredentials([file(credentialsId: 'gcp-key', variable: 'GOOGLE_APPLICATION_CREDENTIALS')]) {
+                    sh '''
+                    # Authenticate with Google Cloud
+                    echo "Using credentials from: $GOOGLE_APPLICATION_CREDENTIALS"
+                    gcloud auth activate-service-account --key-file=$GOOGLE_APPLICATION_CREDENTIALS
+                    '''
+                }
+            }
+        }
+        stage('Terraform Apply (Cluster)') {
+            steps {
+                script {
+                    // Change to the directory containing the Terraform configuration files
+                    dir('terraform') {
+                        sh '''
+                        terraform init
+                        terraform plan
+                        terraform apply --auto-approve
+                        '''
+                    }
+                }
             }
         }
 
-        stage('Checking Connection') {
-            steps {
-                sh '''
-                ansible-inventory --graph
-                '''
-            }
-        }
-
-        stage("Ping Ansible") {
-            steps {
-                sh '''
-                sleep 10
-                ansible all -m ping
-                '''
-            }
-        }
-
-        stage("Ansible Deployment") {
-            steps {
-                sh '''
-                ansible-playbook deploy.yml -e build_number=$BUILD_NUMBER
-                '''
-            }
-        }
-        
      
 
     post {
