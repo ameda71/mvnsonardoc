@@ -74,42 +74,42 @@ pipeline {
             }
         }
 
-    //     stage("Terraform Create Instance") {
-    //         steps {
-    //             sh '''
-    //             terraform init
-    //             terraform plan
-    //             terraform apply --auto-approve
-    //             '''
-    //         }
-    //     }
+        stage("Terraform Create Instance") {
+            steps {
+                sh '''
+                terraform init
+                terraform plan
+                terraform apply --auto-approve
+                '''
+            }
+        }
 
-    //     stage('Checking Connection') {
-    //         steps {
-    //             sh '''
-    //             ansible-inventory --graph
-    //             '''
-    //         }
-    //     }
+        stage('Checking Connection') {
+            steps {
+                sh '''
+                ansible-inventory --graph
+                '''
+            }
+        }
 
-    //     stage("Ping Ansible") {
-    //         steps {
-    //             sh '''
-    //             sleep 10
-    //             ansible all -m ping
-    //             '''
-    //         }
-    //     }
+        stage("Ping Ansible") {
+            steps {
+                sh '''
+                sleep 10
+                ansible all -m ping
+                '''
+            }
+        }
 
-    //     stage("Ansible Deployment") {
-    //         steps {
-    //             sh '''
-    //             ansible-playbook deploy.yml -e build_number=$BUILD_NUMBER
-    //             '''
-    //         }
-    //     }
+        stage("Ansible Deployment") {
+            steps {
+                sh '''
+                ansible-playbook deploy.yml -e build_number=$BUILD_NUMBER
+                '''
+            }
+        }
         
-     }
+     
 
     post {
         success {
