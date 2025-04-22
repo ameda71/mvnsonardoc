@@ -12,6 +12,7 @@ pipeline {
         DOCKER_REPO = "saiteja562/mvnjavasonar"
         GOOGLE_APPLICATION_CREDENTIALS = credentials('gcp-key')
         DEPLOY_YAML = 'deploy.yaml'
+        CLUSTER_NAME = 'cluster-8'
         
     }
 
