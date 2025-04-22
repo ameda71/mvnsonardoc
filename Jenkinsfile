@@ -29,7 +29,6 @@ pipeline {
         }
 
         stage("build & SonarQube analysis") {
-            agent any
             steps {
               withSonarQubeEnv('sonar') {
                 sh ''' 
