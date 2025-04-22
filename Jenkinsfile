@@ -86,6 +86,15 @@ pipeline {
                 }
             }
         }
+
+        stage('Update Deployment Files') {
+            steps {
+                sh '''
+                sed -i "s|image: .*|image: saiteja562/${IMAGE_NAME}:green-${BUILD_NUMBER}|" $DEPLOY_YAML
+                '''
+            }
+        }
+        
         stage('Terraform Apply (Cluster)') {
             steps {
                 script {
@@ -119,6 +128,12 @@ pipeline {
                 sh 'kubectl get svc'
                 sh 'sleep 20'
                 
+            }
+        }
+
+        stage('Get Service') {
+            steps {
+                sh 'kubectl get svc'
             }
         }
 
