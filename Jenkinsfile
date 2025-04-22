@@ -8,7 +8,7 @@ pipeline {
         SONAR_TOKEN = credentials('sonar-token')  // Add this in Jenkins credentials
         IMAGE_NAME = "javasonarqube"
         IMAGE_TAG = "saiteja"
-        DOCKER_HUB_USER = credentials('docker-token')
+        DOCKER_HUB_USER = credentials('docker-hub')
         DOCKER_REPO = "saiteja562/mvnjavasonar"
         GOOGLE_APPLICATION_CREDENTIALS = credentials('gcp')
         DEPLOY_YAML = 'deploy.yaml'
