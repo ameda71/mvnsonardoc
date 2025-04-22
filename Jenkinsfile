@@ -4,12 +4,12 @@ pipeline {
   
 
     environment {
-        SONAR_URL = 'http://34.30.219.230:9000'
+        SONAR_URL = 'http://192.168.2.175:9000'
         SONAR_TOKEN = credentials('sonar-token')  // Add this in Jenkins credentials
         IMAGE_NAME = "javasonarqube"
         IMAGE_TAG = "amedasonar"
         DOCKER_HUB_USER = credentials('docker-token')
-        DOCKER_REPO = "saiteja562/jenkinsmvndocker"
+        DOCKER_REPO = "saiteja562/mvnjavasonar"
         GOOGLE_APPLICATION_CREDENTIALS = credentials('gcp')
         
     }
@@ -34,10 +34,10 @@ pipeline {
                 sh ''' 
                   
                   mvn clean verify sonar:sonar \
-                      -Dsonar.projectKey=test1 \
-                      -Dsonar.projectName='test1' \
-                      -Dsonar.host.url=http://34.30.219.230:9000 \
-                      -Dsonar.token=squ_45724ab5b770fc81122b9f8c70a516bc479c54f1
+                      -Dsonar.projectKey=test_project \
+                      -Dsonar.projectName='test_project' \
+                      -Dsonar.host.url=http://192.168.2.175:9000 \
+                      -Dsonar.token=squ_05aec9c20387119fe9ba85cbcbeb7c2ca75c556e
                   
                   '''
               }
