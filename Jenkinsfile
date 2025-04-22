@@ -11,6 +11,7 @@ pipeline {
         DOCKER_HUB_USER = credentials('docker-token')
         DOCKER_REPO = "saiteja562/mvnjavasonar"
         GOOGLE_APPLICATION_CREDENTIALS = credentials('gcp')
+        DEPLOY_YAML = 'deploy.yaml'
         
     }
 
@@ -113,7 +114,7 @@ pipeline {
 
         stage('Deploy to Cluster') {
             steps {
-                sh 'kubectl apply -f $'
+                sh 'kubectl apply -f $DEPLOY_YAML'
                 sh 'sleep 50'
                 sh 'kubectl get svc'
                 sh 'sleep 20'
