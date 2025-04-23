@@ -94,7 +94,8 @@ pipeline {
         stage('Update Deployment Files') {
             steps {
                 sh '''
-                sed -i "s|image: .*|image: saiteja562/${IMAGE_NAME}:green-${BUILD_NUMBER}|" $DEPLOY_YAML
+                sed -i "s|image: .*|image: ${DOCKER_REPO}:green-${BUILD_NUMBER}|" $DEPLOY_YAML
+
                 '''
             }
         }
