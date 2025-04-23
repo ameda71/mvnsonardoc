@@ -18,7 +18,7 @@ spec:
         - name: jenkinsmvn-container
           image: saiteja562/mvnjavasonar:green-{{BUILD_NUMBER}}
           ports:
-            - containerPort: 8888
+            - containerPort: 8081
 ---
 apiVersion: v1
 kind: Service
