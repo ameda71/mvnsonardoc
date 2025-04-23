@@ -6,14 +6,15 @@ pipeline {
     environment {
         SONAR_URL = 'http://192.168.2.175:9000'
         SONAR_TOKEN = credentials('sonar-token')  // Add this in Jenkins credentials
-        IMAGE_NAME = "javasonarqube"
         IMAGE_TAG = "saiteja"
         DOCKER_HUB_USER = credentials('docker-hub')
-        DOCKER_REPO = "saiteja562/mvnjavasonar"
         GOOGLE_APPLICATION_CREDENTIALS = credentials('gcp-key')
         DEPLOY_YAML = 'deploy.yaml'
         CLUSTER_NAME = 'cluster-8'
         ZONE = 'us-central1-c'
+        IMAGE_NAME = "javasonarqube"
+        DOCKER_REPO = "saiteja562/mvnjavasonar"
+
 
         
     }
@@ -70,8 +71,9 @@ pipeline {
                 script {
                     sh '''
                     echo "${DOCKER_HUB_USER_PSW}" | docker login -u "${DOCKER_HUB_USER_USR}" --password-stdin
-                    docker tag ${IMAGE_NAME} ${DOCKER_REPO}:${BUILD_NUMBER}
-                    docker push ${DOCKER_REPO}:${BUILD_NUMBER}
+                    docker tag ${IMAGE_NAME} ${DOCKER_REPO}:green-${BUILD_NUMBER}
+                    docker push ${DOCKER_REPO}:green-${BUILD_NUMBER}
+
                     '''
                 }
             }
