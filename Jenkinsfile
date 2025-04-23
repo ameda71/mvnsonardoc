@@ -13,6 +13,7 @@ pipeline {
         GOOGLE_APPLICATION_CREDENTIALS = credentials('gcp-key')
         DEPLOY_YAML = 'deploy.yaml'
         CLUSTER_NAME = 'cluster-8'
+        ZONE = 'us-central1-a'
         
     }
 
